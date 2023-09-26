@@ -2,7 +2,9 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Razorpay = require('razorpay');
 const dotenv = require("dotenv");
 const crypto = require("crypto")
-dotenv.config({path:'backend/config/config.env'});
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/config.env" });
+}
 const instance = new Razorpay({
     key_id: process.env.RAZORPAY_API_KEY,
     key_secret: process.env.RAZORPAY_API_SECRET
