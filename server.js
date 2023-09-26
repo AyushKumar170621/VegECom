@@ -8,7 +8,9 @@ process.on("uncaughtException",err => {
     console.log("shutting down the server due to uncaught error");
     process.exit(1);
 })
-dotenv.config({path:'backend/config/config.env'});
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/config.env" });
+}
 connectDatebase();
 
 cloudinary.config({
